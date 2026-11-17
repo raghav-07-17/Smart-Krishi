@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Calculator</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🧮 Farm Calculator</h1>
+        <a href="{{ url_for('home') }}">← Back to home</a>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Estimate quantity and budget</h2>
+
+            <p class="note">
+                Use only a verified quantity per acre from an
+                approved agricultural recommendation. Example
+                values are for calculator testing only.
+            </p>
+
+            <form method="POST">
+                <label>Land area (acres)</label>
+                <input type="number" name="acres" min="0.01"
+                       step="0.01" required>
+
+                <label>Quantity per acre (kg)</label>
+                <input type="number" name="rate" min="0"
+                       step="0.01" required>
+
+                <label>Pack size (kg)</label>
+                <input type="number" name="pack_size" min="0.01"
+                       step="0.01" required>
+
+                <label>Price per pack (₹)</label>
+                <input type="number" name="pack_price" min="0"
+                       step="0.01" required>
+
+                <button type="submit">Calculate</button>
+            </form>
+
+            {% if error %}
+                <p class="message">{{ error }}</p>
+            {% endif %}
+
+            {% if result %}
+                <div class="result">
+                    <h3>Estimated result</h3>
+                    <p>Total quantity: {{ result.quantity }} kg</p>
+                    <p>Packs required: {{ result.packs }}</p>
+                    <p>Estimated cost: ₹{{ result.total_cost }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
