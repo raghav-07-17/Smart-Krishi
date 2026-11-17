@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f6ef;
+    color: #203126;
+    line-height: 1.5;
+}
+
+header {
+    background: #205c3b;
+    color: white;
+    padding: 24px 16px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+header a {
+    color: white;
+}
+
+main {
+    width: min(900px, 100%);
+    margin: 20px auto;
+    padding: 0 14px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px #0000000d;
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    font-weight: bold;
+}
+
+input:not([type="checkbox"]),
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #b8c7ba;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: normal;
+}
+
+.option input {
+    width: 18px;
+    height: 18px;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 20px;
+    background: #205c3b;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #17472d;
+}
+
+.note {
+    color: #58665b;
+    font-size: 14px;
+}
+
+.message,
+.result {
+    padding: 12px;
+    border-radius: 8px;
+    background: #edf5e9;
+}
+
+.record {
+    border-bottom: 1px solid #e0e7df;
+    padding: 12px 0;
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 700px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+    }
+}
