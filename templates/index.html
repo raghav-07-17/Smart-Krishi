@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Krishi Assistant</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🌾 Smart Krishi Assistant</h1>
+        <p>Paddy field support for farmers</p>
+        <a href="{{ url_for('calculator') }}">Open farm calculator →</a>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Enter your field details</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <p class="message">{{ message }}</p>
+                {% endfor %}
+            {% endwith %}
+
+            <form method="POST">
+                <label>Crop</label>
+                <input value="Paddy / Rice" disabled>
+
+                <label>Land area (acres)</label>
+                <input type="number" name="area_acres"
+                       min="0.01" max="10000" step="0.01"
+                       placeholder="Example: 2.5" required>
+
+                <label>Field type</label>
+                <select name="field_type" required>
+                    <option value="">Select field type</option>
+                    <option value="wetland">Wetland</option>
+                    <option value="dryland">Dryland</option>
+                </select>
+
+                <label>Crop growth stage</label>
+                <select name="growth_stage" required>
+                    <option value="">Select growth stage</option>
+                    <option value="seedling">Seedling</option>
+                    <option value="tillering">Tillering</option>
+                    <option value="panicle">Panicle development</option>
+                    <option value="maturity">Maturity</option>
+                </select>
+
+                <label>What have you noticed?</label>
+                <p>Select all that apply.</p>
+
+                <label class="option">
+                    <input type="checkbox" name="symptoms"
+                           value="yellow_leaves">
+                    Yellow leaves
+                </label>
+
+                <label class="option">
+                    <input type="checkbox" name="symptoms"
+                           value="brown_spots">
+                    Brown spots on leaves
+                </label>
+
+                <label class="option">
+                    <input type="checkbox" name="symptoms"
+                           value="weeds">
+                    Weeds in the field
+                </label>
+
+                <label class="option">
+                    <input type="checkbox" name="symptoms"
+                           value="poor_growth">
+                    Poor crop growth
+                </label>
+
+                <label class="option">
+                    <input type="checkbox" name="symptoms"
+                           value="other">
+                    Other symptoms
+                </label>
+
+                <button type="submit">Save field details</button>
+            </form>
+
+            <p class="note">
+                This prototype records symptoms; it does not yet
+                diagnose the cause or recommend a treatment.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Recent field records</h2>
+
+            {% if records %}
+                {% for record in records %}
+                    <article class="record">
+                        <strong>{{ record.area_acres }} acres of paddy</strong>
+                        <p>Field: {{ record.field_type }}</p>
+                        <p>Stage: {{ record.growth_stage }}</p>
+                        <p>Symptoms: {{ record.symptoms or "None" }}</p>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p>No records yet. Add your first field above.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
